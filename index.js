@@ -20,7 +20,10 @@ mongoose
   .catch((e) => console.log(e));
 
 app.use(express.json({ limit: "5mb" }));
-app.use(cors());
+app.use(cors({
+  origin: "https://bookstore.donovanrowzee.net",
+  credentials: true,
+}));
 
 // if (process.env.NODE_ENV === 'development') {
 app.use(morgan("dev"));
