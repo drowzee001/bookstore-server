@@ -11,11 +11,15 @@ const port = process.env.PORT | 3000;
 const db = process.env.MONGO_URI;
 
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
   .then(() => console.log("MongoDB Connected"))
   .catch((e) => console.log(e));
 
-app.use(express.json());
+app.use(express.json({ limit: "5mb" }));
 app.use(cors());
 
 // if (process.env.NODE_ENV === 'development') {
@@ -27,8 +31,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/books", require("./routes/books"));
-// app.use("/carts", require("./routes/carts"));
-// app.use("/orders", require("./routes/orders"));
+app.use("/cartItems", require("./routes/cartItems"));
+app.use("/orders", require("./routes/orders"));
 app.use("/users", require("./routes/users.js"));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
