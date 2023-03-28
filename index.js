@@ -21,7 +21,7 @@ mongoose
 
 app.use(express.json({ limit: "5mb" }));
 app.use(cors({
-  origin: "https://bookstore.donovanrowzee.net",
+  origin: "https://bookstore.donovanrowzee.com",
   credentials: true,
 }));
 
